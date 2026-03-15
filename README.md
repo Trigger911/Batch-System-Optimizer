@@ -22,6 +22,27 @@ I got tired of Windows turning off my USB ports, messing with my network stabili
 
 ---
 
+## **Optional: NVIDIA Driver Optimization**
+For NVIDIA users, I’ve included `New_TriggersNvidiaProfile.txt`. This file contains custom "Compatibility Bits" and "Latency Overrides" that I’ve tested for better frame pacing and stability.
+
+**How to apply it:**
+1.  Download [NVIDIA Profile Inspector](https://github.com).
+2.  Open the program and click the **Import Profiles** button (the green arrow icon in the top toolbar).
+3.  Select `New_TriggersNvidiaProfile.txt` and click **Open**.
+4.  Click **Apply Changes** in the top right corner.
+
+---
+
+## **Future Updates**
+This script is a living project. I will be **adding new features and modifying existing tweaks** as Windows updates roll out and new optimization methods are discovered. Check back often for the latest version!
+
+---
+
+## **Disclaimer**
+**Use this script at your own risk.** While this script is designed to improve performance and creates a system restore point for safety, **I am not responsible for any issues, data loss, or hardware instability** that may occur as a result of using these tweaks. By running this script, you acknowledge that you are responsible for your own system configuration.
+
+---
+
 ## **Credits & Acknowledgments**
 This script integrates the incredible [Windows Utility](https://christitus.com) created by **Chris Titus Tech**. 
 *   **Official Site:** [ChrisTitus.com](https://christitus.com)
