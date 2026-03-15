@@ -15,29 +15,28 @@ if %errorLevel% neq 0 (
 for /f "tokens=2-4 delims=/ " %%a in ('echo %date%') do set "curr_date=%%a-%%b-%%c"
 
 echo ================================================================================
-echo   ____           _                     _____                      _        
-echo  / ___| _   _ ___| |_ ___ _ __ ___     |_   _|_      _____  __ _| |rc ___ 
-echo  \___ \| | | / __| __/ _ \ '_ ` _ \ _____| | \ \ /\ / / _ \/ _` | |/ / __^|
-echo   ___) | |_| \__ \ ||  __/ | | | | |_____| |  \ V  V /  __/ (_| |   <\__ \
-echo  |____/ \__, |___/\__\___|_| |_| |_|     |_|   \_/\_/ \___|\__,_|_|\_\___/
-echo         |___/                                                v.03-15-2026
+echo  ___________    _                                 ___  __  __ 
+echo ^|           ^|  (_)                               / _ \/_ ^|/_ ^|
+echo ^`---^|  ^|----'  _   ____   ____   ____   ____   / /_\ \^| ^| ^| ^|
+echo     ^|  ^|      ^| ^| / _  ^| / _  ^| / _  ^| / _  ^|  ^|  _  ^|^| ^| ^| ^|
+echo     ^|  ^|      ^| ^|^| (_^| ^|^| (_^| ^|^| (_^| ^|^| (_^| ^|^|  ^| ^| ^| ^|^| ^| ^| ^|
+echo     ^|__^|      ^|_^| \___  ^| \___  ^| \___  ^| \___  ^|  \_^| ^|_^|^|_^|^|_^|
+echo                   /____/ /____/ /____/ /____/            v.03-15-2026
 echo ================================================================================
 echo                          SYSTEM AND GPU OPTIMIZER
 echo ================================================================================
 echo  CREDITS:
 echo  - Windows Utility by Chris Titus Tech (christitus.com)
-echo  - Just the Browser by Corbin Davenport (://github.com)
-echo  - Developed by Trigger911
-echo  - https://github.com/Trigger911/Batch-System-Optimizer
+echo  - Just the Browser by Corbin Davenport (justthebrowser.com)
 echo ================================================================================
 
 :: 1. Create Restore Point
 echo [1/14] Creating System Restore Point: System Optimizer %curr_date%...
 powershell -Command "Checkpoint-Computer -Description 'System Optimizer %curr_date%' -RestorePointType 'MODIFY_SETTINGS'" >nul 2>&1
 
-:: 2. Chris Titus Debloat Integration
+:: 2. Chris Titus Debloat Integration (Using your fixed short-link)
 echo [2/14] Launching Chris Titus Utility in a NEW window...
-start powershell -NoExit -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; irm https://christitus.com | iex"
+start powershell -NoExit -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; irm https://christitus.com/win | iex"
 
 echo.
 echo [3/14] Resetting Network Stack...
