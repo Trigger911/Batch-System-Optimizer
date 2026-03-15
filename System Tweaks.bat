@@ -9,7 +9,7 @@ if %errorLevel% neq 0 (
     exit /b 1
 )
 
-:: Set Date Variable for Restore Point naming
+:: Set Date Variable
 for /f "tokens=2-4 delims=/ " %%a in ('echo %date%') do set "curr_date=%%a-%%b-%%c"
 
 echo ================================================================================
@@ -17,22 +17,18 @@ echo                     AUTO-DETECTING SYSTEM AND GPU OPTIMIZER
 echo ================================================================================
 echo                         Created by Trigger911 on 03-15-2026
 echo ================================================================================
+echo  CREDITS:
+echo  - Windows Utility by Chris Titus Tech (christitus.com)
+echo  - Just the Browser by Corbin Davenport (://github.com)
+echo ================================================================================
 
 :: 1. Create Restore Point
 echo [1/12] Creating System Restore Point: System Optimizer %curr_date%...
 powershell -Command "Checkpoint-Computer -Description 'System Optimizer %curr_date%' -RestorePointType 'MODIFY_SETTINGS'" >nul 2>&1
 
-:: 2. Chris Titus Debloat Integration
+:: 2. Chris Titus Debloat Integration (Forced TLS 1.2 & Fallback)
 echo [2/12] Launching Chris Titus Utility...
-set "PS_TEMP=%TEMP%\titus_run.ps1"
-(
-echo $Tweaks = @('WPFTweaksRestorePoint','WPFTweaksWifi','WPFTweaksRightClickMenu','WPFTweaksDebloatAdobe','WPFTweaksStorage','WPFTweaksHiber','WPFTweaksConsumerFeatures','WPFTweaksDVR','WPFTweaksDisableFSO','WPFTweaksTele','WPFTweaksAH','WPFTweaksEndTaskOnTaskbar','WPFTweaksBlockAdobeNet','WPFTweaksEdgeDebloat','WPFTweaksRemoveCopilot','WPFTweaksDiskCleanup','WPFTweaksHome','WPFTweaksDisableExplorerAutoDiscovery','WPFTweaksPowershell7Tele','WPFTweaksDeleteTempFiles','WPFTweaksDisableBGapps','WPFTweaksServices'^)
-echo $Features = @('WPFFeatureslegacymedia','WPFFeatureEnableLegacyRecovery','WPFFeaturesdotnet'^)
-echo irm "https://christitus.com" ^| iex
-echo Invoke-WPFTweaks -Tweaks $Tweaks -Features $Features
-) > "%PS_TEMP%"
-powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File \"%PS_TEMP%\"' -Verb RunAs -Wait"
-if exist "%PS_TEMP%" del "%PS_TEMP%"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; try { irm https://christitus.com | iex } catch { irm https://github.com | iex }"
 
 echo.
 echo [3/12] Resetting Network Stack and Disabling Teredo...
@@ -40,9 +36,10 @@ netsh winsock reset >nul
 netsh int ip reset >nul
 netsh interface teredo set state disabled >nul
 
-echo [4/12] Applying BCDEDIT Timer Tweaks (Lower Latency)...
+echo [4/12] Applying Timer Tweaks (HPET & Dynamic Tick)...
 bcdedit /set useplatformclock no >nul 2>&1
 bcdedit /set disabledynamictick yes >nul 2>&1
+powershell -Command "Get-PnpDevice -FriendlyName 'High precision event timer' -ErrorAction SilentlyContinue | Disable-PnpDevice -Confirm:$false" >nul 2>&1
 
 echo [5/12] Disabling Network and USB Power Saving...
 powershell -Command "Get-NetAdapter | Disable-NetAdapterPowerManagement -NoRestart -ErrorAction SilentlyContinue" >nul 2>&1
@@ -73,20 +70,28 @@ if !RAM_GB! GEQ 15 (
     reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 16777216 /f >nul
 )
 
-echo [10/12] Purging AI and Extended Bloatware List...
-:: Comprehensive removal of requested apps and their provisioned installers
+echo [10/12] Purging Extended Bloatware...
 powershell -Command "$apps = @('*BingWeather*', '*Spotify*', '*Zune*', '*Xbox*', '*Microsoft.MixedReality*', '*QuickAssist*', '*WindowsFeedbackHub*', '*Copilot*', '*MicrosoftFamily*', '*MicrosoftOfficeHub*', '*BingSearch*', '*Clipchamp*', '*MSTeams*', '*Todos*', '*StickyNotes*', '*BingNews*', '*OutlookForWindows*', '*WindowsAlarms*', '*SolitaireCollection*'); foreach ($app in $apps) { Get-AppxPackage -AllUsers $app | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue }" >nul 2>&1
-:: Run zoicware Windows AI Removal
-powershell -Command "& ([scriptblock]::Create((irm 'https://raw.githubusercontent.com')))" >nul 2>&1
 
+:: 10b. Optional "Just the Browser" Tweak
+echo.
+set /p browser_choice="Apply 'Just the Browser' (Stripped down Chrome/Edge/Firefox)? (Y/N): "
+if /i "%browser_choice%"=="Y" (
+    echo    -- Running Corbin Davenport's Just the Browser script...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "& ([scriptblock]::Create((irm 'https://raw.githubusercontent.com')))"
+)
+
+echo.
 echo [11/12] Cleaning Temporary Files and System Cache...
 del /q /f /s %TEMP%\* >nul 2>&1
 del /q /f /s C:\Windows\Temp\* >nul 2>&1
 del /q /f /s C:\Windows\Prefetch\* >nul 2>&1
 
-echo [12/12] Applying Handheld Performance Tweaks (VBS/Hibernate)...
+echo [12/12] Applying Extreme Latency Tweaks (VBS/Hibernate)...
+:: Disabling VBS/Core Isolation (Significant FPS/Latency gain for ALL PCs)
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f >nul 2>&1
 bcdedit /set hypervisorlaunchtype off >nul 2>&1
+:: Disabling Hibernate (Frees SSD space and stops background task overhead)
 powercfg -h off >nul 2>&1
 
 echo.
