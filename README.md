@@ -12,7 +12,7 @@ This is my personal "one-click" solution to stop Windows from over-managing hard
 *   **Extended Bloatware Purge:** Removes 20+ junk apps including Xbox, Spotify, Teams, and Copilot.
 *   **Extreme Latency Tweaks:** Hard-disables **VBS (Virtualization-Based Security)** and **Core Isolation**, freeing up CPU overhead for significantly higher FPS.
 *   **Zero USB Disconnects:** Prevents Windows from putting USB Hubs and controllers to sleep (perfect for Sim-Racers and peripherals).
-*   **Optional "Just the Browser" Tweak:** Interactive choice to strip down Chrome, Edge, and Firefox to bare essentials for privacy and raw speed.
+*   **Optional "Just the Browser" Tweak:** Interactive choice to strip down Chrome, Edge, and Firefox to bare essentials for privacy and speed.
 *   **Smart RAM Management:** Detects 16GB+ RAM to disable memory compression and optimize system service splitting.
 
 ---
@@ -30,6 +30,11 @@ When the blue **Chris Titus Windows Utility** window appears during Step 2:
 3.  Select the `chrisdeblot Powershell-5-25-2025.json` file.
 4.  Click **"Run Tweaks"** to apply my custom high-performance configuration.
 
+### **🛡️ O&O ShutUp10++ Instructions**
+If you choose to run the O&O ShutUp tool within the utility:
+*   **Recommended:** Select "Apply only recommended settings" (green checkmarks).
+*   **⚠️ WARNING:** Avoid disabling **Location Services** if you use the Windows Weather widget or want automatic Time Zone updates. Disabling this can cause the system to "lose" your current location, resulting in broken weather data and incorrect system clocks.
+
 ---
 
 ## **🎮 NVIDIA Driver Optimization**
@@ -41,8 +46,8 @@ For NVIDIA users, I’ve included `New_TriggersNvidiaProfile.txt`.
 3. Select the file and click **Apply Changes**.
 
 **⚠️ Hardware Optimization Advice:**
-*   **RTX 40xx / 50xx Series:** My profile is pre-configured for the **M Model Transformer** (best for Ampere, Ada Lovelace, and newer).
-*   **RTX 20xx / 30xx Series:** If you are on an older GPU (Turing or Pascal), manually switch the Transformer setting to **K Model** within the Inspector for better frame pacing and stability on older architectures.
+*   **RTX 30xx / 40xx / 50xx Series:** My profile is pre-configured for the **M Model Transformer** (best for Ampere, Ada Lovelace, and newer).
+*   **GTX 10xx / 16xx / RTX 20xx Series:** If you are on an older GPU, manually switch the Transformer setting to **K Model** within the Inspector for better frame pacing and stability.
 
 ---
 
