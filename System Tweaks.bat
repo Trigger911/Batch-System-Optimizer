@@ -28,6 +28,7 @@ echo  CREDITS:
 echo  - Windows Utility by Chris Titus Tech (christitus.com)
 echo  - Just the Browser by Corbin Davenport (://github.com)
 echo  - Developed by Trigger911
+echo  - https://github.com/Trigger911/Batch-System-Optimizer
 echo ================================================================================
 
 :: 1. Create Restore Point
