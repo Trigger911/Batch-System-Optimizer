@@ -41,8 +41,8 @@ For NVIDIA users, I’ve included `New_TriggersNvidiaProfile.txt`.
 3. Select the file and click **Apply Changes**.
 
 **⚠️ Hardware Optimization Advice:**
-*   **RTX 40xx / 50xx Series:** My profile is pre-configured for the **M Model Transformer** (best for Ada Lovelace and newer).
-*   **GTX 10xx / 16xx / RTX 20xx Series:** If you are on an older GPU, manually switch the Transformer setting to **K Model** within the Inspector for better frame pacing and stability on older architectures.
+*   **RTX 40xx / 50xx Series:** My profile is pre-configured for the **M Model Transformer** (best for Ampere, Ada Lovelace, and newer).
+*   **RTX 20xx / 30xx Series:** If you are on an older GPU (Turing or Pascal), manually switch the Transformer setting to **K Model** within the Inspector for better frame pacing and stability on older architectures.
 
 ---
 
