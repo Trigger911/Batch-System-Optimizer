@@ -15,7 +15,7 @@ I got tired of Windows turning off my USB ports, messing with my network stabili
 ---
 
 ## **How to Use**
-1.  **Download** the `optimizer.bat` file from this repository.
+1.  **Download** the `System Tweaks.bat` file from this repository.
 2.  **Right-click** the file and select **Run as Administrator**.
 3.  The script will guide you through 8 optimization steps.
 4.  **Restart your computer** once the script finishes to apply all changes.
