@@ -1,4 +1,4 @@
-# 🚀 System & GPU Optimizer: Extreme Edition
+# 🚀 System & GPU Optimizer
 **Created by Trigger911** | **Version: 03-15-2026**
 
 This is my personal "one-click" solution to stop Windows from over-managing hardware. It targets system latency, bloatware, and hardware power-states to ensure your PC stays **on** and stays **fast**. 
